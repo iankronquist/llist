@@ -12,11 +12,11 @@ llelement-objs:
 
 # compile tests for llist
 llist-tests:
-	$(CXX) llistTests.cpp llist.cpp llelement.cpp -o llist-tests
+	$(CXX) -g llistTests.cpp llist.cpp llelement.cpp -o llist-tests
 
 # compile tests for llelement
 llelement-tests:
-	$(CXX) llelementTests.cpp llelement.cpp -o llelement-tests
+	$(CXX) -g llelementTests.cpp llelement.cpp -o llelement-tests
 
 # compile all test targets
 all-tests: llist-tests llelement-tests
