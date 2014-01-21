@@ -52,6 +52,10 @@ void llist<T>::append(T input)
          	prevElement->next = newElement;
 		newElement->prev = prevElement;
         	this->tail = newElement;
+		if (this->length == INT_MAX)
+		{
+			throw new MaximumLengthExceededException();
+		}
         	this->length = this->length + 1;
     	}
 }
