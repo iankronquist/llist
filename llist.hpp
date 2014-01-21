@@ -5,6 +5,8 @@
 // This exception is thrown when an invalid index outside the range of
 // the llist is provided.
 #include "IndexOutsideOfRangeException.hpp"
+// This exception is thrown when the number of elements exceeds INT_MAX
+#include "MaximumLengthExceededException.hpp"
 #include <climits>
 
 // An implementation of a linked list designed as a reusable component for 

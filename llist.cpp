@@ -134,7 +134,8 @@ void llist<T>::pop()
 	this->tail = NULL;
 }
 
-int numberOfElements()
+template <typename T>
+int llist<T>::numberOfElements()
 {
 	return this->length;
 }
