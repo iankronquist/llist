@@ -6,6 +6,10 @@ basic data structures.
 This program has been designed to be used in future projects with an eye 
 towards separation of concerns and a clean interface.  
 
+License:
+--------
+Standard MIT license.
+
 Documentation:
 --------------
 The `llist` class is designed to be used by the programmer. The programmer
