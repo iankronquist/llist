@@ -1,26 +1,30 @@
 #include "llist.hpp"
-//#include <stdio.h> //for debugging
+#include <stdio.h> //for debugging
 #include <cassert>
 
-llist::llist()
+
+template <typename T>
+llist<T>::llist()
 {
 	this->head = NULL;//llelementCreate(0, NULL, NULL);
 	this->tail = NULL;
 	this->length = 0;
 }
 
-llist::llist(T* array, int length)
+template <typename T>
+llist<T>::llist(T* array, int length)
 {
-	llistCreate();
+	llist();
 	for(int i = 0; i < length; i++)
 	{
 		this->append(array[i]);
 	}
 }
 
-~llist::llist()
+template <typename T>
+llist<T>::~llist()
 {
-	llelement* currentElement = this->head;
+	llelement<T>* currentElement = this->head;
 	for (int i = 0; i <this->length; i++)
 	{
 		currentElement = currentElement->next;
@@ -28,13 +32,13 @@ llist::llist(T* array, int length)
 		delete(currentElement->prev);
 	}
 	delete(currentElement);
-	printf("Freeing list %p\n", list);
-	delete(list);
+	printf("Freeing list %p\n", this);
 }
 
-void llist::append(T input)
+template <typename T>
+void llist<T>::append(T input)
 {
-        struct llelement* newElement = new llelement(input, list->tail, NULL);
+        llelement<T>* newElement = new llelement<T>(input, this->tail, NULL);
         //if the list has no head, and is empty
 	if (this->head == NULL)
 	{
@@ -44,7 +48,7 @@ void llist::append(T input)
 	//else the list already has an element
 	else
 	{
-        	llelement* prevElement = this->tail;
+        	llelement<T>* prevElement = this->tail;
          	prevElement->next = newElement;
 		newElement->prev = prevElement;
         	this->tail = newElement;
@@ -53,25 +57,28 @@ void llist::append(T input)
 }
 
 
-T llist::head()
+template <typename T>
+T llist<T>::first()
 {
 	return this->head->value;
 }
 
-T llist::tail()
+template <typename T>
+T llist<T>::last()
 {
 	return this->tail->value;
 }
 
 
 
-T llist::at(int index)
+template <typename T>
+T llist<T>::at(int index)
 {
-	if(index > list->length)
+	if(index > this->length)
 	{
 		throw new IndexOutsideOfRangeException();
 	}
-	llelement* seekElement = this->head;
+	llelement<T>* seekElement = this->head;
 	for(int i = 1; i < index; i++)
 	{
 		seekElement = seekElement->next;
@@ -79,13 +86,14 @@ T llist::at(int index)
 	return seekElement->value;
 }
 
-void llist::at(int index, T value)
+template <typename T>
+void llist<T>::at(int index, T value)
 {
 	if(index > this->length)
 	{
 		throw new IndexOutsideOfRangeException();
 	}
-	llelement* seekElement = list->head;
+	llelement<T>* seekElement = this->head;
 	for(int i = 1; i < index; i++)
 	{
 		seekElement = seekElement->next;
@@ -93,13 +101,14 @@ void llist::at(int index, T value)
 	seekElement->value = value;
 }
 
-void llist::pop(int index)
+template <typename T>
+void llist<T>::pop(int index)
 {
-	if(index > list->length)
+	if(index > this->length)
 	{
 		throw new IndexOutsideOfRangeException();
 	}
-	llelement* seekElement = list->head;
+	llelement<T>* seekElement = this->head;
 	for(int i = 1; i < index; i++)
 	{
 		seekElement = seekElement->next;
@@ -111,6 +120,26 @@ void llist::pop(int index)
 		this->tail = seekElement->prev;
 	}
 	delete(seekElement);
-	this->length = list->length + 1;
+	this->length = this->length + 1;
 }
+
+// The following templates define what types can be held as the values in
+// llist objects. 
+// These are the standard integer types both signed and unsigned.
+template class llist<int>;
+template class llist<short>;
+template class llist<long>;
+template class llist<unsigned int>;
+template class llist<unsigned short>;
+template class llist<unsigned long>;
+// The following are the standard floating point types, both signed and unsigned
+template class llist<float>;
+template class llist<double>;
+// Booleans
+template class llist<bool>;
+// String types
+template class llist<std::string>;
+template class llist<char*>;
+// void pointers which may be cast as pointers to whatever object you need.
+template class llist<void*>;
 
