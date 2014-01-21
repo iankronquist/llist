@@ -53,7 +53,7 @@ The following public methods are available:
 	An overload of `append(Type value)`.
 * `void push(int index, Type value)`  
 	An overload of `void at(int index, Type value)`.
-* `int numberOfElements()`
+* `int numberOfElements()`  
 	Returns the number of elements in the `llist`.
 
 Below is an example of the `llist` in use
