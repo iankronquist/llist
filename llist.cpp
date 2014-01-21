@@ -123,6 +123,18 @@ void llist<T>::pop(int index)
 	this->length = this->length + 1;
 }
 
+template <typename T>
+void llist<T>::pop()
+{
+	delete this->tail;
+	this->tail = NULL;
+}
+
+int numberOfElements()
+{
+	return this->length;
+}
+
 // The following templates define what types can be held as the values in
 // llist objects. 
 // These are the standard integer types both signed and unsigned.

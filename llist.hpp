@@ -50,5 +50,7 @@ class llist
 		void pop();
 		// Removes the index-th element of the list.
 		void pop(int index);
+		// Returns the number of elements.
+		int numberOfElements();
 };
 #endif
